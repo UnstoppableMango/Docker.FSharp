@@ -1,4 +1,4 @@
-module UnMango.Docker.ContainerCreate
+module UnMango.Docker.Container.Create
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerCreate
 type Create =

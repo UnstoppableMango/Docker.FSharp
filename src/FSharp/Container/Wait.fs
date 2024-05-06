@@ -1,4 +1,4 @@
-module UnMango.Docker.ContainerWait
+module UnMango.Docker.Container.Wait
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerWait
 type Wait =

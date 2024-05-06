@@ -1,4 +1,4 @@
-module UnMango.Docker.ContainerLogs
+module UnMango.Docker.Container.Logs
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerLogs
 type Logs =

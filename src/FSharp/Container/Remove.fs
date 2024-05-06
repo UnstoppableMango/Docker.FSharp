@@ -1,4 +1,4 @@
-module UnMango.Docker.ContainerRemove
+module UnMango.Docker.Container.Remove
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerDelete
 type Remove =
