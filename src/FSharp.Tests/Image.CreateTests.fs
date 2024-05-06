@@ -1,6 +1,6 @@
 module ImagesCreateTests
 
-open UnMango.Docker.ImageCreate
+open UnMango.Docker.Image.Create
 open FsCheck.Xunit
 
 [<Property>]

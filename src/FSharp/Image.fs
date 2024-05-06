@@ -1,7 +1,7 @@
 [<AutoOpen>]
-module UnMango.Docker.Image
+module UnMango.Docker.Images
 
-open ImageCreate
+open Image.Create
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Image
 type Action =
