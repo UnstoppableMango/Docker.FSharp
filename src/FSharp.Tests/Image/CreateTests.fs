@@ -1,7 +1,7 @@
-module ImagesCreateTests
+module UnMango.Docker.Image.CreateTests
 
-open UnMango.Docker.Image.Create
 open FsCheck.Xunit
+open UnMango.Docker.Image.Create
 
 [<Property>]
 let ``CreateBuilder builds create action`` i s r t m c =

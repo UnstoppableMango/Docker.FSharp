@@ -1,3 +1,4 @@
+[<AutoOpen>]
 module UnMango.Docker.Container.Attach
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerAttach
@@ -38,6 +39,6 @@ type AttachBuilder(id: string) =
     [<CustomOperation("stream")>]
     member inline _.Stream(attach, stream) = { attach with Stream = stream }
 
-    member inline _.Yield(_: unit) = create id
+    member _.Yield(_: unit) = create id
 
 let attach id = AttachBuilder(id)

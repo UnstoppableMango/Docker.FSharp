@@ -1,14 +1,14 @@
 [<AutoOpen>]
-module UnMango.Docker.Container
+module UnMango.Docker.Containers
 
-open ContainerAttach
-open ContainerCreate
-open ContainerKill
-open ContainerLogs
-open ContainerRemove
-open ContainerStart
-open ContainerStop
-open ContainerWait
+open Container.Attach
+open Container.Create
+open Container.Kill
+open Container.Logs
+open Container.Remove
+open Container.Start
+open Container.Stop
+open Container.Wait
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container
 type Action =
@@ -37,3 +37,11 @@ type Action =
     | Archive
     | ExtractArchive
     | Delete
+
+type ContainerBuilder() =
+    member inline _.Combine(actions: Action list, xs: Action list) = actions @ xs
+    member inline _.Delay(f) = f ()
+    member inline _.Yield(create: Create) = [ Create create ]
+    member inline _.Zero() = []
+
+let container = ContainerBuilder()
