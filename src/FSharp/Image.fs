@@ -1,5 +1,7 @@
 [<AutoOpen>]
-module UnMango.Docker.Images.Image
+module UnMango.Docker.Image
+
+open ImageCreate
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Image
 type Action =
@@ -26,5 +28,3 @@ type ImageBuilder() =
     member inline _.Zero() = []
 
 let image = ImageBuilder()
-
-let test = image { create { fromImage "" } }
