@@ -131,6 +131,12 @@
         "dependencies": {
           "xunit.extensibility.core": "[2.8.0]"
         }
+      },
+      "UnMango.Docker.FSharp": {
+        "type": "Project",
+        "dependencies": {
+          "FSharp.Core": "[8.0.300-beta.24178.1, )"
+        }
       }
     }
   }

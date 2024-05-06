@@ -19,7 +19,21 @@ Not to be confused with [Docker.FSharp](https://github.com/UnstoppableMango/Dock
 
 ## Usage
 
-TODO
+The majority of the library is still a work in progress.
+
+Right now an image builder is available for defining a create image operation.
+
+```fsharp
+let myImage = image {
+    create {
+        fromImage "ubuntu"
+        tag: "latest"
+    }
+}
+```
+
+It's worth noting that no interaction with the docker API is actually performed.
+The intent is to provide a definition that a client can use to perform operations.
 
 ## Q/A
 

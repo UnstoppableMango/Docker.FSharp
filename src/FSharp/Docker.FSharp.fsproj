@@ -10,9 +10,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Library.fs" />
 		<None Include="packages.lock.json" Pack="false" />
 		<None Include="$(ProjectRoot)/README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+		<Compile Include="Image\Create.fs" />
+    <Compile Include="Image.fs" />
+    <Compile Include="Container\Attach.fs" />
+    <Compile Include="Container\Create.fs" />
+    <Compile Include="Container\Kill.fs" />
+    <Compile Include="Container\Logs.fs" />
+    <Compile Include="Container\Remove.fs" />
+    <Compile Include="Container\Start.fs" />
+    <Compile Include="Container\Stop.fs" />
+    <Compile Include="Container\Wait.fs" />
+		<Compile Include="Container.fs" />
   </ItemGroup>
 
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
