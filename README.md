@@ -8,7 +8,7 @@
 
 This library defines a computation expression that can be used to describe Docker operations.
 
-Not to be confused with [Docker.FSharp](https://github.com/UnstoppableMango/Docker.FSharp)!
+Not to be confused with [Docker.DotNet.FSharp](https://github.com/UnstoppableMango/Docker.DotNet.FSharp)!
 
 ## Install
 
