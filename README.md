@@ -21,22 +21,70 @@ Not to be confused with [Docker.DotNet.FSharp](https://github.com/UnstoppableMan
 
 The majority of the library is still a work in progress.
 
-Right now an image builder is available for defining a create image operation.
+Currently, a very basic series of image and container operations can be defined using the `docker` builder.
 
 ```fsharp
-let myImage = image {
-    create {
+let dockerActions = docker {
+    Image.create {
         fromImage "ubuntu"
-        tag: "latest"
+        tag "latest"
+    }
+    Container.create "my-container" {
+        entrypoint "bash"
     }
 }
 ```
 
 It's worth noting that no interaction with the docker API is actually performed.
-The intent is to provide a definition that a client can use to perform operations.
+The intent is to provide the ability to describe operations that a client can consume to perform operations.
+
+The sister library, [Docker.DotNet.FSharp](https://github.com/UnstoppableMango/Docker.DotNet.FSharp), is one such consumer that provides `Docker.run` to execute operations using `Docker.DotNet`.
+
+## Development
+
+At a minimum, the [.NET SDK](https://dotnet.microsoft.com) is required.
+At the time of writing this project is built with .NET 9.0 which you can find [here](https://dotnet.microsoft.com/download/dotnet/9.0).
+The specific version is defined in [global.json](./global.json).
+
+It might be a good idea to install [make](https://www.gnu.org/software/make/) but it is not required.
+
+If you do however, you can just clone the repo and run `make`.
+
+This will:
+
+- Restore dependencies
+- Restore tools (like fantomas)
+- Build the solution
+- Run the linter
+- Run tests
+
+There are a number of make targets for common tasks such as `build`, `test`, `lint`, `format` and `pack`.
+
+You can also use the `dotnet` CLI like normal.
+
+```shell
+dotnet build
+dotnet test
+```
+
+A solution file is provided for IDE's that support it, such as Rider, Visual Studio, and Ionide.
+
+If you prefer a devcontainer, there is a barebones definition in `.devcontainer/devcontainer.json`.
+It's not fully configured yet, so you may need to install some tools manually.
+
+You can run `make devcontainer` to build the container with the devcontainers-cli.
+This command requires [Node.js](https://nodejs.org) and `npx` (shipped with node).
 
 ## Q/A
 
-### Idiomatic? This looks nothing like the F# I write!
+### Why make?
 
-If something looks off please open an issue! I've only recently been diving further into the F# ecosystem.
+It makes me feel smarter than I actually am.
+
+### Why use the preview SDK?
+
+I like living on the edge.
+
+### The name seems like it was chosen deliberately to be confusing.
+
+That's not a question, get off my back man.

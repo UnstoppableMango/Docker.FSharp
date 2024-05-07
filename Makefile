@@ -66,4 +66,4 @@ out/UnMango.Docker.FSharp.$(VERSION).nupkg: $(SRC) $(PROJECT_FILE) README.md
 	@touch $@
 
 .make/ensure_npx:
-	@bin="$$(which npx)" && echo "$$bin" > $@ || echo 'Install Node.js first' && exit 1
+	@bin="$$(which npx)" && echo "$$bin" > $@ || (echo 'Install Node.js first' && exit 1)
