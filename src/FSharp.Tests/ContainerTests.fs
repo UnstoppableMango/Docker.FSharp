@@ -20,17 +20,17 @@ let ``AttachBuilder builds attach action`` expected d =
     expected = actual
 
 [<Property>]
-let ``AttachBuilder builds attach action with unary operations`` i d =
+let ``AttachBuilder builds attach action with unary operations`` expected d =
     let expected =
-        { Id = i
-          DetachKeys = Some d
-          Logs = true
-          Stream = true
-          Stdin = true
-          Stdout = true
-          Stderr = true }
+        { expected with
+            DetachKeys = Some d
+            Logs = true
+            Stream = true
+            Stdin = true
+            Stdout = true
+            Stderr = true }
 
-    let actual = attach i {
+    let actual = attach expected.Id {
         detachKeys d
         logs
         stream
@@ -55,6 +55,33 @@ let ``CreateBuilder builds create action`` expected p =
         openStdin expected.OpenStdin
         stdinOnce expected.StdinOnce
         tty expected.Tty
+        platform p
+    }
+
+    expected = actual
+
+[<Property>]
+let ``CreateBuilder builds create action with unary operations`` expected p =
+    let expected =
+        { expected with
+            Platform = Some p
+            AttachStderr = true
+            AttachStdin = true
+            AttachStdout = true
+            OpenStdin = true
+            StdinOnce = true
+            Tty = true }
+
+    let actual = create expected.Name {
+        attachStderr
+        attachStdin
+        attachStdout
+        cmd expected.Cmd
+        entrypoint expected.Entrypoint
+        env expected.Env
+        openStdin
+        stdinOnce
+        tty
         platform p
     }
 
