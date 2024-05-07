@@ -15,6 +15,7 @@
 	<ItemGroup>
 		<Compile Include="ImageTests.fs" />
 		<Compile Include="ContainerTests.fs" />
+		<Compile Include="DockerTests.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 
