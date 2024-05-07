@@ -5,4 +5,12 @@ type Start =
     { Id: string
       DetachKeys: string option }
 
-let create id = { Id = id; DetachKeys = None }
+let init id = { Id = id; DetachKeys = None }
+
+type StartBuilder(id) =
+    [<CustomOperation("detachKeys")>]
+    member inline _.DetachKeys(start: Start, keys) = { start with DetachKeys = Some keys }
+
+    member _.Yield(_: unit) = init id
+
+let start id = StartBuilder(id)
