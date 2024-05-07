@@ -1,36 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageId>UnMango.Docker.FSharp</PackageId>
 		<AssemblyName>UnMango.Docker.FSharp</AssemblyName>
 		<RootNamespace>UnMango.Docker</RootNamespace>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+	</PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 		<None Include="packages.lock.json" Pack="false" />
 		<None Include="$(ProjectRoot)/README.md" Pack="true" PackagePath="/" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 		<Compile Include="Image\Create.fs" />
-    <Compile Include="Image.fs" />
-    <Compile Include="Container\Attach.fs" />
-    <Compile Include="Container\Create.fs" />
-    <Compile Include="Container\Kill.fs" />
-    <Compile Include="Container\Logs.fs" />
-    <Compile Include="Container\Remove.fs" />
-    <Compile Include="Container\Start.fs" />
-    <Compile Include="Container\Stop.fs" />
-    <Compile Include="Container\Wait.fs" />
+		<Compile Include="Image.fs" />
+		<Compile Include="Container\Attach.fs" />
+		<Compile Include="Container\Create.fs" />
+		<Compile Include="Container\Kill.fs" />
+		<Compile Include="Container\Logs.fs" />
+		<Compile Include="Container\Remove.fs" />
+		<Compile Include="Container\Start.fs" />
+		<Compile Include="Container\Stop.fs" />
+		<Compile Include="Container\Wait.fs" />
 		<Compile Include="Container.fs" />
-  </ItemGroup>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="all" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MinVer" Version="5.0.0" PrivateAssets="all" />
+	</ItemGroup>
 
 	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
 		<IsAotCompatible>true</IsAotCompatible>
