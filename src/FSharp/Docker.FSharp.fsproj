@@ -26,6 +26,7 @@
 		<Compile Include="Container\Stop.fs" />
 		<Compile Include="Container\Wait.fs" />
 		<Compile Include="Container.fs" />
+		<Compile Include="Docker.fs" />
 	</ItemGroup>
 
 	<ItemGroup>
