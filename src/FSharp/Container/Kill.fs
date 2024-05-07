@@ -1,3 +1,4 @@
+[<AutoOpen>]
 module UnMango.Docker.Container.Kill
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerKill

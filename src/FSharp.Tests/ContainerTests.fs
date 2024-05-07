@@ -1,11 +1,6 @@
 module UnMango.Docker.Container.ContainerTests
 
 open FsCheck.Xunit
-open UnMango.Docker.Container.Create
-open UnMango.Docker.Container.Remove
-open UnMango.Docker.Container.Start
-open UnMango.Docker.Container.Stop
-open UnMango.Docker.Container.Wait
 open UnMango.Docker.Containers
 
 [<Property>]
