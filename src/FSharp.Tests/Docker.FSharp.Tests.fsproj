@@ -13,9 +13,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Include="Image\CreateTests.fs" />
 		<Compile Include="ImageTests.fs" />
-		<Compile Include="Container\CreateTests.fs" />
+		<Compile Include="ContainerTests.fs" />
 		<Compile Include="Program.fs" />
 	</ItemGroup>
 

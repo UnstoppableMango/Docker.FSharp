@@ -41,6 +41,7 @@ type Action =
 type ContainerBuilder() =
     member inline _.Combine(actions: Action list, xs: Action list) = actions @ xs
     member inline _.Delay(f) = f ()
+    member inline _.Yield(attach: Attach) = [ Attach attach ]
     member inline _.Yield(create: Create) = [ Create create ]
     member inline _.Zero() = []
 
