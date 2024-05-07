@@ -2,6 +2,7 @@ module UnMango.Docker.Container.ContainerTests
 
 open FsCheck.Xunit
 open UnMango.Docker.Containers
+open UnMango.Docker.Containers.Container
 
 [<Property>]
 let ``AttachBuilder builds attach action`` (expected: Attach) d =
@@ -16,7 +17,7 @@ let ``AttachBuilder builds attach action`` (expected: Attach) d =
         stderr expected.Stderr
     }
 
-    expected = actual
+    Attach expected = actual
 
 [<Property>]
 let ``AttachBuilder builds attach action with unary operations`` expected d =
@@ -38,7 +39,7 @@ let ``AttachBuilder builds attach action with unary operations`` expected d =
         stderr
     }
 
-    expected = actual
+    Attach expected = actual
 
 [<Property>]
 let ``CreateBuilder builds create action`` expected p =
@@ -57,7 +58,7 @@ let ``CreateBuilder builds create action`` expected p =
         platform p
     }
 
-    expected = actual
+    Create expected = actual
 
 [<Property>]
 let ``CreateBuilder builds create action with unary operations`` expected p =
@@ -84,7 +85,7 @@ let ``CreateBuilder builds create action with unary operations`` expected p =
         platform p
     }
 
-    expected = actual
+    Create expected = actual
 
 [<Property>]
 let ``RemoveBuilder builds remove action`` (expected: Remove) =
@@ -94,7 +95,7 @@ let ``RemoveBuilder builds remove action`` (expected: Remove) =
         v expected.V
     }
 
-    expected = actual
+    Remove expected = actual
 
 [<Property>]
 let ``RemoveBuilder builds remove action with unary operations`` expected =
@@ -110,7 +111,7 @@ let ``RemoveBuilder builds remove action with unary operations`` expected =
         v
     }
 
-    expected = actual
+    Remove expected = actual
 
 [<Property>]
 let ``StartBuilder builds start action`` (expected: Start) d =
@@ -118,7 +119,7 @@ let ``StartBuilder builds start action`` (expected: Start) d =
 
     let actual = start expected.Id { detachKeys d }
 
-    expected = actual
+    Start expected = actual
 
 [<Property>]
 let ``StopBuilder builds start action`` (expected: Stop) d =
@@ -126,7 +127,7 @@ let ``StopBuilder builds start action`` (expected: Stop) d =
 
     let actual = stop expected.Id { t d }
 
-    expected = actual
+    Stop expected = actual
 
 [<Property>]
 let ``WaitBuilder builds wait action`` (expected: Wait) d =
@@ -134,64 +135,4 @@ let ``WaitBuilder builds wait action`` (expected: Wait) d =
 
     let actual = wait expected.Id { condition d }
 
-    expected = actual
-
-[<Property>]
-let ``ContainerBuilder builds attach action`` id s =
-    let expected = attach id { stream s }
-
-    let actual = container { expected }
-
-    match actual with
-    | [ Attach x ] -> expected = x
-    | _ -> false
-
-[<Property>]
-let ``ContainerBuilder builds create action`` name =
-    let expected = create name { tty }
-
-    let actual = container { expected }
-
-    match actual with
-    | [ Create x ] -> expected = x
-    | _ -> false
-
-[<Property>]
-let ``ContainerBuilder builds remove action`` id d =
-    let expected = remove id { force d }
-
-    let actual = container { expected }
-
-    match actual with
-    | [ Remove x ] -> expected = x
-    | _ -> false
-
-[<Property>]
-let ``ContainerBuilder builds start action`` id d =
-    let expected = start id { detachKeys d }
-
-    let actual = container { expected }
-
-    match actual with
-    | [ Start x ] -> expected = x
-    | _ -> false
-
-[<Property>]
-let ``ContainerBuilder builds stop action`` id d =
-    let expected = stop id { t d }
-
-    let actual = container { expected }
-
-    match actual with
-    | [ Stop x ] -> expected = x
-    | _ -> false
-
-[<Property>]
-let ``ContainerBuilder builds wait action`` id d =
-    let expected = wait id { condition d }
-
-    let actual = container { expected }
-
-    match actual with
-    | [ Wait x ] -> expected = x
-    | _ -> false
+    Wait expected = actual

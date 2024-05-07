@@ -1,7 +1,7 @@
 ﻿module UnMango.Docker.ImageTests
 
 open FsCheck.Xunit
-open UnMango.Docker.Image.Create
+open UnMango.Docker.Images.Image
 open UnMango.Docker.Images
 
 [<Property>]
@@ -23,14 +23,4 @@ let ``CreateBuilder builds create action`` i s r t m c =
         changes c
     }
 
-    expected = actual
-
-[<Property>]
-let ``ImagesBuilder builds create action`` img =
-    let expected = create { fromImage img }
-
-    let actual = image { expected }
-
-    match actual with
-    | [ Create x ] -> expected = x
-    | _ -> false
+    Create expected = actual

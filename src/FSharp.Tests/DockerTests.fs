@@ -1,7 +1,6 @@
 module UnMango.Docker.DockerTests
 
 open FsCheck.Xunit
-open UnMango.Docker.Image
 
 [<Property>]
 let ``DockerBuilder builds container action`` (expected: Containers.Action) =
@@ -18,11 +17,3 @@ let ``DockerBuilder builds image action`` (expected: Images.Action) =
     match actual with
     | [ Image x ] -> expected = x
     | _ -> false
-
-let acceptance () =
-    let test = container { Container.Create.create "" { cmd "" } }
-
-    docker {
-        image { create { fromImage "" } }
-        test
-    }
