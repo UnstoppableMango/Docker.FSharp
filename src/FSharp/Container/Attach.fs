@@ -11,7 +11,7 @@ type Attach =
       Stdout: bool
       Stderr: bool }
 
-let create id =
+let init id =
     { Id = id
       DetachKeys = None
       Logs = false
@@ -54,6 +54,6 @@ type AttachBuilder(id: string) =
     [<CustomOperation("stream")>]
     member inline this.Stream(attach) = this.Stream(attach, true)
 
-    member _.Yield(_: unit) = create id
+    member _.Yield(_: unit) = init id
 
 let attach id = AttachBuilder(id)

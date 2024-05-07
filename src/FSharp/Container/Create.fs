@@ -14,7 +14,7 @@ type Create =
       Env: string list
       Entrypoint: string list }
 
-let create name =
+let init name =
     { Name = name
       Platform = None
       AttachStdin = false
@@ -74,6 +74,10 @@ type CreateBuilder(name) =
     [<CustomOperation("openStdin")>]
     member inline this.OpenStdin(create) = this.OpenStdin(create, true)
 
+    [<CustomOperation("platform")>]
+    member inline _.Platform(create, platform) =
+        { create with Platform = Some platform }
+
     [<CustomOperation("stdinOnce")>]
     member inline _.StdinOnce(create, stdin) = { create with StdinOnce = stdin }
 
@@ -86,8 +90,6 @@ type CreateBuilder(name) =
     [<CustomOperation("tty")>]
     member inline this.Tty(create) = this.Tty(create, true)
 
-    [<CustomOperation("platform")>]
-    member inline _.Platform(create, platform) =
-        { create with Platform = Some platform }
+    member _.Yield(_: unit) = init name
 
-    member _.Yield(_: unit) = create name
+let create name = CreateBuilder(name)
