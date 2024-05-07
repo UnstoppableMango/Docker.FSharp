@@ -26,6 +26,28 @@ let ``AttachBuilder builds attach action`` i d l s n o e =
     expected = actual
 
 [<Property>]
+let ``AttachBuilder builds attach action with unary operations`` i d =
+    let expected =
+        { Id = i
+          DetachKeys = Some d
+          Logs = true
+          Stream = true
+          Stdin = true
+          Stdout = true
+          Stderr = true }
+
+    let actual = attach i {
+        detachKeys d
+        logs
+        stream
+        stdin
+        stdout
+        stderr
+    }
+
+    expected = actual
+
+[<Property>]
 let ``ContainerBuilder builds attach action`` id s =
     let expected = attach id { stream s }
 
