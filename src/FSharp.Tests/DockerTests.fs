@@ -16,10 +16,7 @@ let ``DockerBuilder builds container action`` (expected: Containers.Action) =
 let ``DockerBuilder builds image action`` (expected: Images.Action) =
     let actual = docker { expected }
 
-    match actual with
-    | [ Image x ] -> expected = x
-    | _ -> false
-
+    [ Image expected ] = actual
 [<Property>]
 let ``DockerBuilder preconfigures container from image`` name =
     let actual = docker {
