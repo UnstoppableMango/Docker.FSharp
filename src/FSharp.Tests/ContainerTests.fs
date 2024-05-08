@@ -42,8 +42,12 @@ let ``AttachBuilder builds attach action with unary operations`` expected d =
     Attach expected = actual
 
 [<Property>]
-let ``CreateBuilder builds create action`` expected p =
-    let expected = { expected with Platform = Some p }
+let ``CreateBuilder builds create action`` expected p i w =
+    let expected =
+        { expected with
+            Platform = Some p
+            Image = Some i
+            WorkingDir = Some w }
 
     let actual = create expected.Name {
         attachStderr expected.AttachStderr
@@ -56,15 +60,19 @@ let ``CreateBuilder builds create action`` expected p =
         stdinOnce expected.StdinOnce
         tty expected.Tty
         platform p
+        image i
+        workingDir w
     }
 
     Create expected = actual
 
 [<Property>]
-let ``CreateBuilder builds create action with unary operations`` expected p =
+let ``CreateBuilder builds create action with unary operations`` expected p i w =
     let expected =
         { expected with
             Platform = Some p
+            Image = Some i
+            WorkingDir = Some w
             AttachStderr = true
             AttachStdin = true
             AttachStdout = true
@@ -83,6 +91,8 @@ let ``CreateBuilder builds create action with unary operations`` expected p =
         stdinOnce
         tty
         platform p
+        image i
+        workingDir w
     }
 
     Create expected = actual

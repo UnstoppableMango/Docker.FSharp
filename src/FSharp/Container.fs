@@ -32,7 +32,9 @@ type Create =
       StdinOnce: bool
       Cmd: string list
       Env: string list
-      Entrypoint: string list }
+      Entrypoint: string list
+      Image: string option
+      WorkingDir: string option }
 
 module Create =
     let init name =
@@ -46,7 +48,9 @@ module Create =
           StdinOnce = false
           Cmd = List.empty
           Env = List.empty
-          Entrypoint = List.empty }
+          Entrypoint = List.empty
+          Image = None
+          WorkingDir = None }
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerKill
 type Kill = { Id: string; Signal: string option }
@@ -218,6 +222,9 @@ type CreateBuilder(name) =
     [<CustomOperation("env")>]
     member inline _.Env(create, env) = { create with Env = env @ create.Env }
 
+    [<CustomOperation("image")>]
+    member inline _.Image(create, image) = { create with Image = Some image }
+
     [<CustomOperation("openStdin")>]
     member inline _.OpenStdin(create, stdin) = { create with OpenStdin = stdin }
 
@@ -241,6 +248,9 @@ type CreateBuilder(name) =
 
     [<CustomOperation("tty")>]
     member inline this.Tty(create) = this.Tty(create, true)
+
+    [<CustomOperation("workingDir")>]
+    member inline _.WorkingDir(create, dir) = { create with WorkingDir = Some dir }
 
     member _.Yield(_: unit) = Create.init name
 
