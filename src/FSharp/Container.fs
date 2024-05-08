@@ -34,7 +34,8 @@ type Create =
       Env: string list
       Entrypoint: string list
       Image: string option
-      WorkingDir: string option }
+      WorkingDir: string option
+      ExposedPorts: Map<string, unit> }
 
 module Create =
     let init name =
@@ -50,7 +51,8 @@ module Create =
           Env = List.empty
           Entrypoint = List.empty
           Image = None
-          WorkingDir = None }
+          WorkingDir = None
+          ExposedPorts = Map.empty }
 
 // https://docs.docker.com/engine/api/v1.41/#tag/Container/operation/ContainerKill
 type Kill = { Id: string; Signal: string option }
@@ -221,6 +223,23 @@ type CreateBuilder(name) =
 
     [<CustomOperation("env")>]
     member inline _.Env(create, env) = { create with Env = env @ create.Env }
+
+    [<CustomOperation("exposedPort")>]
+    member inline _.ExposedPort(create, port) =
+        { create with
+            ExposedPorts = create.ExposedPorts |> Map.add port () }
+
+    [<CustomOperation("exposedPorts")>]
+    member inline _.ExposedPorts(create, ports) = { create with ExposedPorts = ports }
+
+    [<CustomOperation("exposedPorts")>]
+    member inline _.ExposedPorts(create, ports) =
+        let kv x = (x, ())
+        let folder acc key value = Map.add key value acc
+        let (+) = List.map kv >> Map.ofList >> Map.fold folder
+
+        { create with
+            ExposedPorts = ports + create.ExposedPorts }
 
     [<CustomOperation("image")>]
     member inline _.Image(create, image) = { create with Image = Some image }
