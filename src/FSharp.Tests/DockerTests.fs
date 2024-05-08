@@ -8,7 +8,7 @@ open UnMango.Docker.Images
 let ``DockerBuilder builds container action`` (expected: Containers.Action) =
     let actual = docker { expected }
 
-    match actual with
+    [ Container expected ] = actual
     | [ Container x ] -> expected = x
     | _ -> false
 
