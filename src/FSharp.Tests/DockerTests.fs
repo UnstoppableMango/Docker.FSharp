@@ -5,6 +5,12 @@ open UnMango.Docker.Containers
 open UnMango.Docker.Images
 
 [<Property>]
+let ``DockerBuilder Zero is empty`` () =
+    let actual = docker.Zero()
+
+    [] = actual
+
+[<Property>]
 let ``DockerBuilder builds container action`` (expected: Containers.Action) =
     let actual = docker { expected }
 
